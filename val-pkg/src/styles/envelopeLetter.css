@@ -1,0 +1,372 @@
+
+.envelope-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.envelope-container.minimized {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-height: auto;
+  z-index: 1000;
+  padding: 0;
+}
+
+
+.envelope {
+  width: 240px;
+  height: 120px;
+  cursor: pointer;
+  position: relative;
+  perspective: 2000px;
+  background: var(--envelope-dark);
+  border-radius: 0 0 15px 15px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  box-shadow: 0 15px 40px var(--shadow);
+}
+
+.envelope.opened {
+  pointer-events: none;
+}
+
+.envelope.minimized {
+  width: 90px;
+  height: 45px;
+  cursor: pointer;
+  pointer-events: all;
+  box-shadow: 0 5px 20px var(--shadow);
+}
+
+
+.heart-icon {
+  position: absolute;
+  right: -20px;
+  top: -40px;
+  font-size: 45px;
+  z-index: 10;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  filter: drop-shadow(0 5px 10px rgba(255, 107, 157, 0.5));
+  transition: all 0.5s ease;
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(1);
+  }
+  30% {
+    transform: scale(1.15);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.envelope.opened .heart-icon {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.envelope.minimized .heart-icon {
+  top: -12px;
+  font-size: 22px;
+}
+
+
+.paper {
+  bottom: 0;
+  width: 85%;
+  height: 85%;
+  position: absolute;
+  text-align: center;
+  border-radius: 8px 8px 6px 6px;
+  background: #ffffff;
+  opacity: 0;
+  z-index: 5;
+  transition: 0.5s;
+  box-shadow: 
+    inset 0 1px 3px rgba(0,0,0,0.05),
+    0 2px 5px rgba(0,0,0,0.1);
+}
+
+.paper::before,
+.paper::after {
+  content: '';
+  left: 12%;
+  height: 2px;
+  position: absolute;
+  border-radius: 50px;
+  background: rgba(255, 182, 200, 0.25);
+}
+
+.paper::before {
+  top: 30%;
+  width: 45%;
+}
+
+.paper::after {
+  top: 50%;
+  width: 55%;
+}
+
+.envelope.opened .paper {
+  transform: translateY(-180px) scale(2);
+  transition: transform 1.5s 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 3;
+  opacity: 0; 
+}
+
+.envelope.minimized .paper {
+  width: 75%;
+  height: 75%;
+  transform: scale(1);
+}
+
+
+.letter-preview {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Caveat';
+  font-size: 30px;
+  color: var(--text-dark);
+  white-space: nowrap;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
+  animation: fadeIn 0.5s ease;
+}
+
+
+.left-flap,
+.right-flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  bottom: 0;
+  filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.15));
+}
+
+.left-flap::before,
+.right-flap::before,
+.top-flap::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 0 0 15px 15px;
+}
+
+.left-flap::before {
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+  background: var(--envelope-dark);
+}
+
+.right-flap::before {
+  background: var(--envelope-medium);
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.top-flap {
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  transition: 1s 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transform-origin: top;
+  transform: rotateX(1deg);
+  filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.3));
+  z-index: 6;
+}
+
+.top-flap::before {
+  clip-path: polygon(0 0, 100% 0, 50% 100%, 0 0);
+  background: var(--envelope-light);
+}
+
+.envelope.opened .top-flap {
+  transform: rotateX(190deg);
+  transition: transform 0.7s ease;
+  filter: none;
+}
+
+.envelope.minimized .top-flap {
+  transform: rotateX(1deg);
+  border-radius: 0 0 8px 8px;
+}
+
+.envelope.minimized .left-flap::before,
+.envelope.minimized .right-flap::before {
+  border-radius: 0 0 8px 8px;
+}
+
+
+.letter-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 90%;
+  max-width: 650px;
+  min-height: 450px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 50px 40px;
+  box-shadow: 0 25px 70px rgba(255, 107, 157, 0.4);
+  z-index: 500;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  background-image: 
+    repeating-linear-gradient(
+      transparent,
+      transparent 35px,
+      rgba(255, 182, 200, 0.08) 35px,
+      rgba(255, 182, 200, 0.08) 36px
+    );
+}
+
+.letter-content.visible {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+
+.close-letter {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  gap: 2px;
+}
+
+.close-heart {
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.close-letter:hover .close-heart {
+  transform: scale(1.2);
+  animation: heartbeat 0.5s ease;
+}
+
+
+.letter-header {
+  text-align: center;
+  margin-bottom: 35px;
+  margin-top: 25px;
+  font-family: 'Pacifico', cursive;
+  color: var(--dark-pink);
+  font-size: 36px;
+  text-shadow: 2px 2px 4px rgba(255, 182, 200, 0.3);
+  animation: fadeIn 0.8s ease 0.3s both;
+}
+
+
+.letter-body {
+  font-family: 'Caveat', cursive;
+  font-size: 30px;
+  line-height: 1.9;
+  color: var(--text-dark);
+  margin-bottom: 35px;
+  animation: fadeIn 0.8s ease 0.5s both;
+}
+
+.letter-body p {
+  margin-bottom: 20px;
+}
+
+
+.letter-signature {
+  text-align: right;
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  color: var(--secondary-pink);
+  margin-top: 25px;
+  animation: fadeIn 0.8s ease 0.7s both;
+}
+
+
+@media (max-width: 768px) {
+  .envelope {
+    width: 180px;
+    height: 90px;
+  }
+
+  .envelope.minimized {
+    width: 70px;
+    height: 35px;
+  }
+
+  .heart-icon {
+    font-size: 35px;
+    top: -20px;
+  }
+
+  .envelope.minimized .heart-icon {
+    font-size: 18px;
+    top: -10px;
+  }
+
+  .letter-content {
+    width: 95%;
+    padding: 40px 25px;
+    min-height: 400px;
+  }
+
+  .letter-header {
+    font-size: 28px;
+    margin-top: 20px;
+  }
+
+  .letter-body {
+    font-size: 20px;
+  }
+
+  .letter-signature {
+    font-size: 22px;
+  }
+
+  .close-letter {
+    width: 35px;
+    height: 35px;
+  }
+
+  .close-heart {
+    font-size: 20px;
+  }
+
+  /* .close-x {
+    font-size: 18px;
+  } */
+}
+
+@media (max-width: 480px) {
+  .letter-body {
+    font-size: 18px;
+  }
+
+  .letter-header {
+    font-size: 24px;
+  }
+}
