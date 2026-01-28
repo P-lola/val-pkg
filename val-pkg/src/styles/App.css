@@ -1,13 +1,4 @@
-/**
- * App.css - Main Application Styles
- * 
- * Contains global styles, CSS variables, and background decorations
- * for the entire application.
- */
 
-/* ==========================================
-   CSS VARIABLES - COLOR SCHEME
-   ========================================== */
 :root {
   --primary-pink: #ffb6c8;
   --secondary-pink: #ff8fa8;
@@ -27,9 +18,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap');
 
-/* ==========================================
-   GLOBAL RESET AND BASE STYLES
-   ========================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -46,7 +35,6 @@ body {
   animation: gradientShift 15s ease infinite;
 }
 
-/* Subtle animated gradient background */
 @keyframes gradientShift {
   0%, 100% {
     background-position: 0% 50%;
@@ -56,9 +44,7 @@ body {
   }
 }
 
-/* ==========================================
-   MAIN APP CONTAINER
-   ========================================== */
+
 .app {
   min-height: 100vh;
   position: relative;
@@ -71,9 +57,7 @@ body {
   min-height: calc(100vh - 120px);
 }
 
-/* ==========================================
-   BACKGROUND FLOATING DECORATIONS
-   ========================================== */
+
 .bg-decorations {
   position: fixed;
   top: 0;
@@ -92,7 +76,6 @@ body {
   animation: float 20s infinite ease-in-out;
 }
 
-/* Distribute hearts across the screen */
 .floating-heart:nth-child(1) { 
   left: 10%; 
   animation-delay: 0s; 
@@ -142,7 +125,6 @@ body {
 }
 
 
-/* Fade in animation for components */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -154,7 +136,6 @@ body {
   }
 }
 
-/* Smooth transitions */
 .smooth-transition {
   transition: all 0.3s ease;
 }

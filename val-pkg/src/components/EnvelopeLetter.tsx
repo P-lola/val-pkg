@@ -66,7 +66,7 @@ const EnvelopeLetter: React.FC<EnvelopeLetterProps> = ({
       {isOpen && (
         <div className={`letter-content ${isOpen ? 'visible' : ''}`}>
           <button className="close-letter" onClick={handleCloseClick}>
-            <span className="close-heart">❤️</span>
+            <span className="close-heart">X</span>
           </button>
           
           <div className="letter-header">My Dearest Love 💕</div>

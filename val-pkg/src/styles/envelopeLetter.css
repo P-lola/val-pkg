@@ -261,13 +261,14 @@
 }
 
 .close-heart {
-  font-size: 24px;
+  font-size: 30px;
   transition: transform 0.3s ease;
 }
 
+
 .close-letter:hover .close-heart {
-  transform: scale(1.2);
-  animation: heartbeat 0.5s ease;
+  transform: scale(1.5);
+  text-shadow: rgba(0, 0, 0, 0.15);
 }
 
 
