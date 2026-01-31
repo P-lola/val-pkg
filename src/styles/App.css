@@ -16,6 +16,50 @@
   --white: #ffffff;
 }
 
+html {
+  /* Prevent zoom on iOS devices */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  /* Set base font size */
+  font-size: 16px;
+  
+  /* Ensure proper scaling */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  /* Prevent text scaling issues */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  /* Ensure proper sizing */
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Prevent iOS Safari from zooming on input focus */
+input, select, textarea, button {
+  font-size: 16px !important;
+}
+
+/* Prevent double-tap zoom on iOS */
+button, a {
+  touch-action: manipulation;
+}
 
 * {
   margin: 0;
