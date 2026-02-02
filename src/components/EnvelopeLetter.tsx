@@ -30,7 +30,6 @@ const EnvelopeLetter: React.FC<EnvelopeLetterProps> = ({
     onEnvelopeClick();
   };
 
-  // Handle letter close button click
   const handleCloseClick = () => {
     playClickSound();
     onLetterClose();

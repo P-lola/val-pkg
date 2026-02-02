@@ -6,6 +6,12 @@
   min-height: 100vh;
   padding: 20px;
   transition: all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  pointer-events: none;
+}
+
+
+.envelope-container > .envelope {
+  pointer-events: all; 
 }
 
 .envelope-container.minimized {
@@ -107,7 +113,7 @@
   content: '';
   left: 12%;
   height: 2px;
-  position: absolute;
+  position: relative;
   border-radius: 50px;
   background: rgba(255, 182, 200, 0.25);
 }
@@ -214,20 +220,24 @@
 
 
 .letter-content {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
+  overflow-y: auto;
+  overflow-x: hidden;
   transform: translate(-50%, -50%) scale(0);
   width: 90%;
   max-width: 650px;
+  max-height: 100vh;
   min-height: 450px;
   background: #ffffff;
+  text-align: justify;
   border-radius: 20px;
-  padding: 50px 40px;
+  padding: 30px 40px;
   box-shadow: 0 25px 70px rgba(255, 107, 157, 0.4);
-  z-index: 500;
+  z-index: 1500;
   opacity: 0;
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
   background-image: 
     repeating-linear-gradient(
       transparent,
@@ -237,14 +247,34 @@
     );
 }
 
+.letter-content.visible::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(5px);
+  z-index: -1;
+}
+
 .letter-content.visible {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
 }
 
+.letter-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+  background: var(--primary-pink);
+  border-radius: 10px;
+}
+
 
 .close-letter {
-  position: absolute;
+  position: sticky;
   top: 15px;
   right: 15px;
   width: 40px;
@@ -306,4 +336,5 @@
   margin-top: 25px;
   animation: fadeIn 0.8s ease 0.7s both;
 }
+
 

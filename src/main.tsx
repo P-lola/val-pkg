@@ -1,3 +1,5 @@
+document.body.style.zoom = "50%"
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles/App.css';
