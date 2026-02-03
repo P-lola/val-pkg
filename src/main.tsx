@@ -4,7 +4,7 @@ const isTablet = /ipad|android(?!.*mobile)|tablet/i.test(navigator.userAgent) ||
                  (navigator.userAgent === 'MacIntel' && navigator.maxTouchPoints > 1) ||
                  (window.innerWidth >= 768 && window.innerWidth <= 1024);
 
-document.body.style.zoom = isTablet ? "100%" : "50%";
+document.body.style.zoom = isTablet ? "85%" : "50%";
 
 const style = document.createElement('style');
 style.textContent = `
